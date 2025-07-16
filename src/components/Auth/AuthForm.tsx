@@ -1,15 +1,16 @@
 import { useState } from 'react';
+import LoginForm from './LoginForm';
 
 const AuthForm = () => {
   const [login, setLogin] = useState<boolean>(true);
   return (
-    <form>
-      {login ? <div></div> : <div></div>}
+    <div className="bg-white w-1/3  h-3/4 rounded-md p-6">
+      {login ? <LoginForm /> : <div></div>}
 
       <button onClick={() => setLogin(!login)}>
-        {login ? 'login' : 'register'}
+        {login ? 'switch to register' : 'switch to login'}
       </button>
-    </form>
+    </div>
   );
 };
 export default AuthForm;
