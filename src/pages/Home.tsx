@@ -1,5 +1,10 @@
+import { Link } from 'react-router-dom';
 const Home = () => {
-  return <div className="text-lg text-red-400">Hello world</div>;
+  return (
+    <div>
+      <Link to="/Auth">go to login</Link>
+    </div>
+  );
 };
 
 export default Home;
