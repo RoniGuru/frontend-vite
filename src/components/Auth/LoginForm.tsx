@@ -1,10 +1,23 @@
 import { useState } from 'react';
+import { api } from '../../api/api';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const handleLogin = () => {
-    console.log(username, password);
+
+  const navigate = useNavigate();
+
+  const handleLogin = async () => {
+    try {
+      const response = await api.post('/login', { name: username, password });
+      console.log('response ', response);
+      if (response.status === 200) {
+        navigate('/');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="flex flex-col gap-1 h-3/4  justify-between">

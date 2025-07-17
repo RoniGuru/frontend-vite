@@ -1,10 +1,28 @@
 import { useState } from 'react';
+import { api } from '../../api/api';
+
 const RegisterForm = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
-  const handleRegister = () => {
-    console.log(username, password);
+
+  const handleRegister = async () => {
+    if (password != confirmPassword) {
+      alert('passwords do not match');
+    }
+
+    try {
+      const response = await api.post('/register', {
+        name: username,
+        password,
+      });
+
+      if (response.status === 200) {
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="flex flex-col gap-1 h-3/4  justify-between">
