@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { api } from '../../api/api';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './context/useAuth';
+import type { LoginResponseData } from './context/type';
 
 const LoginForm = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const { setUser } = useAuth();
+  const { setUser, setAccessToken } = useAuth();
 
   const navigate = useNavigate();
 
@@ -16,7 +17,9 @@ const LoginForm = () => {
       const response = await api.post('/login', { name: username, password });
       console.log('response ', response);
       if (response.status === 200) {
-        setUser(response.data);
+        const data: LoginResponseData = response.data;
+        setUser(data.user);
+        setAccessToken(data.accessToken);
         navigate('/');
       }
     } catch (error) {
