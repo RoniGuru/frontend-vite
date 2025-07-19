@@ -6,6 +6,7 @@ export type AuthContextType = {
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   accessToken: string;
   setAccessToken: React.Dispatch<React.SetStateAction<string>>;
+  logout: () => void;
 };
 
 export const AuthContext = createContext<AuthContextType | undefined>(
