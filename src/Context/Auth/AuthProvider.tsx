@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   async function logout() {
     if (user) {
       const response = await api.post(`/logout/${user.id}`);
+      console.log(response);
 
       if (response.status === 200) {
         setUser(null);
@@ -23,12 +24,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
+  async function get() {
+    if (user) {
+      console.log(document.cookie);
+      const response = await api.get(`/user/${user.id}`);
+      console.log(response.data);
+    }
+  }
+
   const value: AuthContextType = {
     user,
     setUser,
     accessToken,
     setAccessToken,
     logout,
+    get,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
