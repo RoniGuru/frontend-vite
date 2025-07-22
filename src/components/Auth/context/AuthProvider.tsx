@@ -11,6 +11,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   function logout() {
     setUser(null);
     setAccessToken('');
+    //set refresh token to empty
+    document.cookie =
+      'refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
   }
 
   const value: AuthContextType = {
