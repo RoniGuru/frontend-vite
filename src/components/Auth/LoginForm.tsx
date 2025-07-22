@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { api } from '../../api/api';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './context/useAuth';
-import type { LoginResponseData } from './context/type';
+import { useAuth } from '../../Context/Auth/useAuth';
+import type { LoginResponseData } from '../../Context/Auth/type';
 
 const LoginForm = () => {
   const [username, setUsername] = useState<string>('');
