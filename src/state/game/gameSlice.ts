@@ -24,15 +24,18 @@ const gameSlice = createSlice({
   reducers: {
     startGame: (state) => {
       state.gameState = 'playing';
+      state.currentWord = pickRandomWord(state.words);
+      state.score = 0;
+      state.time = 60;
     },
     endGame: (state) => {
       state.gameState = 'finished';
+      state.currentWord = '';
+      state.time = 60;
     },
-    setWord: (state) => {
+    nextWord: (state) => {
       //get random word
       state.currentWord = pickRandomWord(state.words);
-    },
-    increaseScore: (state) => {
       state.score += 1;
     },
   },
@@ -43,5 +46,5 @@ function pickRandomWord(words: string[]) {
   return words[randomIndex];
 }
 
-export const { startGame, endGame, setWord, increaseScore } = gameSlice.actions;
+export const { startGame, endGame, nextWord } = gameSlice.actions;
 export default gameSlice.reducer;

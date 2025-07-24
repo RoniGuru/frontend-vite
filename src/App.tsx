@@ -4,28 +4,32 @@ import Auth from './pages/Auth';
 import { AuthProvider } from './Context/Auth/AuthProvider';
 import { ProtectedRoute } from './Context/Auth/ProtectedRoute';
 import { PersistGate } from 'redux-persist/integration/react';
-import { persistor } from './state/store';
+import { persistor, store } from './state/store';
+import Game from './pages/Game';
+import { Provider } from 'react-redux';
 
 function App() {
   return (
-    <AuthProvider>
-      <PersistGate persistor={persistor}>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <Home />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route path="/auth" element={<Auth />} />
-          </Routes>
-        </BrowserRouter>
-      </PersistGate>
-    </AuthProvider>
+    <Provider store={store}>
+      <AuthProvider>
+        <PersistGate persistor={persistor}>
+          <BrowserRouter>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <Home />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/game" element={<Game />} />
+            </Routes>
+          </BrowserRouter>
+        </PersistGate>
+      </AuthProvider>
+    </Provider>
   );
 }
 
