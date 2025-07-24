@@ -52,11 +52,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<User>) => {
-      const { id, name, created_at, high_score } = action.payload;
-      state.user.id = id;
-      state.user.created_at = created_at;
-      state.user.name = name;
-      state.user.high_score = high_score;
+      state.user = action.payload;
     },
     clearUser: (state) => {
       state.user.id = 0;

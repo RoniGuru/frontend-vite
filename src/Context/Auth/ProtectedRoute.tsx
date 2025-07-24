@@ -11,9 +11,8 @@ import { useSelector } from 'react-redux';
 export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const user = useSelector((state: RootState) => state.user.user);
 
-  if (user.id === 0) {
+  if (!user || user.id === 0 || user.id === undefined) {
     return <Navigate to="/auth" replace />;
   }
-
   return children;
 };

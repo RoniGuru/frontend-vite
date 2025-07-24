@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../Context/Auth/useAuth';
+import type { RootState } from '../state/store';
+import { useSelector } from 'react-redux';
 const Home = () => {
-  const { user, accessToken, logout, get } = useAuth();
+  const user = useSelector((state: RootState) => state.user.user);
+
+  const { accessToken, logout, get } = useAuth();
   return (
     <div className="flex flex-col">
       <div>
