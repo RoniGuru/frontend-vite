@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from '../../state/user/userSlice';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const user = useSelector((state: RootState) => state.user);
+  const user = useSelector((state: RootState) => state.user.user);
   const dispatch = useDispatch<AppDispatch>();
 
   const [accessToken, setAccessToken] = useState<string>('');

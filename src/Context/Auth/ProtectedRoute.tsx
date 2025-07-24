@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
  * @returns  The children if user is authenticated, otherwise redirects to auth page
  */
 export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
-  const user = useSelector((state: RootState) => state.user);
+  const user = useSelector((state: RootState) => state.user.user);
 
   if (user.id === 0) {
     return <Navigate to="/auth" replace />;
