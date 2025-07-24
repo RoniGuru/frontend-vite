@@ -39,9 +39,14 @@ const Game = () => {
     dispatch(endGame());
   }
 
-  function checkWord() {
-    if (game.currentWord === userInput) {
+  //changes userinput and checks if correct
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
+    setUserInput(value);
+
+    if (value === game.currentWord) {
       dispatch(nextWord());
+      setTimeout(() => setUserInput(''), 50); //timeout for feedback
     }
   }
 
@@ -50,13 +55,8 @@ const Game = () => {
       <div>score : {game.score}</div>
       <div>{seconds}</div>
       <div>{game.currentWord}</div>
-      <input value={userInput} onChange={(e) => setUserInput(e.target.value)} />
-      <button
-        className="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors duration-200 font-semibold"
-        onClick={checkWord}
-      >
-        next
-      </button>
+      <input value={userInput} onChange={handleInputChange} />
+
       <div>
         <button
           className="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors duration-200 font-semibold"
