@@ -12,7 +12,7 @@ interface gameData {
 
 export const initialState: gameData = {
   gameState: 'waiting',
-  time: 60,
+  time: 10,
   score: 0,
   words: wordBank,
   currentWord: '',
@@ -26,12 +26,10 @@ const gameSlice = createSlice({
       state.gameState = 'playing';
       state.currentWord = pickRandomWord(state.words);
       state.score = 0;
-      state.time = 60;
     },
     endGame: (state) => {
       state.gameState = 'finished';
       state.currentWord = '';
-      state.time = 60;
     },
     nextWord: (state) => {
       //get random word
