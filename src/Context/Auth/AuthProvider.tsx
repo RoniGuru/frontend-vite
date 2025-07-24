@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import type { ReactNode } from 'react';
-import type { User } from './type';
 import { AuthContext } from './authContext';
 import type { AuthContextType } from './authContext';
 import { api } from '../../api/api';
+import type { RootState, AppDispatch } from '../../state/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearUser } from '../../state/user/userSlice';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const user = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch<AppDispatch>();
+
   const [accessToken, setAccessToken] = useState<string>('');
 
   async function logout() {
@@ -15,7 +19,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       console.log(response);
 
       if (response.status === 200) {
-        setUser(null);
+        dispatch(clearUser());
         setAccessToken('');
         //set refresh token to empty
         document.cookie =
@@ -33,8 +37,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const value: AuthContextType = {
-    user,
-    setUser,
     accessToken,
     setAccessToken,
     logout,

@@ -3,12 +3,17 @@ import { api } from '../../api/api';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/Auth/useAuth';
 import type { LoginResponseData } from '../../Context/Auth/type';
+import type { AppDispatch } from '../../state/store';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../state/user/userSlice';
 
 const LoginForm = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const { setUser, setAccessToken } = useAuth();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { setAccessToken } = useAuth();
 
   const navigate = useNavigate();
 
@@ -18,7 +23,7 @@ const LoginForm = () => {
       console.log('response ', response);
       if (response.status === 200) {
         const data: LoginResponseData = response.data;
-        setUser(data.user);
+        dispatch(setUser(data.user));
         setAccessToken(data.accessToken);
         navigate('/');
       }

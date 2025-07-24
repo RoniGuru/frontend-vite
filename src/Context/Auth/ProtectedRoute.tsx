@@ -1,6 +1,7 @@
-import { useAuth } from './useAuth';
 import type { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
+import type { RootState } from '../../state/store';
+import { useSelector } from 'react-redux';
 
 /**
  *
@@ -8,8 +9,9 @@ import { Navigate } from 'react-router-dom';
  * @returns  The children if user is authenticated, otherwise redirects to auth page
  */
 export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
-  const { user } = useAuth();
-  if (user === null) {
+  const user = useSelector((state: RootState) => state.user);
+
+  if (user.id === 0) {
     return <Navigate to="/auth" replace />;
   }
 
