@@ -34,19 +34,17 @@ const Timer = () => {
   }, [game.gameState, seconds, dispatch, game.time]);
 
   return (
-    <div className="flex items-center justify-center">
-      <div
-        className="  px-4 py-2 w-1/12 text-center
+    <div
+      className="  px-4 py-2 w-24 text-center
         bg-gray-900 
         rounded-lg 
         border-2 border-gray-700
-        font-mono text-2xl font-bold
+        font-mono  
     
         transition-colors duration-300
         shadow-lg text-white"
-      >
-        {seconds}
-      </div>
+    >
+      {seconds}
     </div>
   );
 };
