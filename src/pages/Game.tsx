@@ -23,7 +23,7 @@ const Game = () => {
     const value = e.target.value;
     setUserInput(value);
 
-    if (value === game.currentWord) {
+    if (value.toLowerCase() === game.currentWord.toLowerCase()) {
       dispatch(nextWord());
       setTimeout(() => setUserInput(''), 50); //timeout for feedback
     }
@@ -50,7 +50,7 @@ const Game = () => {
                 <input
                   value={userInput}
                   onChange={handleInputChange}
-                  className="p-2 mt-2 rounded-lg mt-4 focus:outline-none focus:ring-2 focus:ring-gray-800"
+                  className="p-2 mt-6 rounded-lg  focus:outline-none focus:ring-2 focus:ring-gray-800"
                 />
               </div>
               <button
