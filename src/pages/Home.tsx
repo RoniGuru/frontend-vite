@@ -5,11 +5,11 @@ import { useSelector } from 'react-redux';
 const Home = () => {
   const user = useSelector((state: RootState) => state.user.user);
 
-  const { accessToken, logout, get } = useAuth();
+  const { logout, get } = useAuth();
   return (
     <div className="flex flex-col">
       <div>
-        welcome {user?.name} your id is {user?.id} access token is {accessToken}
+        welcome {user?.name} your id is {user?.id}
       </div>
       <Link to="/Auth">go to login</Link>
 
