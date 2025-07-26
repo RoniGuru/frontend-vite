@@ -64,14 +64,18 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(saveUserScore.pending, (state) => {
-        state.loading = false;
+        state.loading = true;
       })
       .addCase(
         saveUserScore.fulfilled,
         (state, action: PayloadAction<number>) => {
           state.user.high_score = action.payload;
+          state.loading = false;
         }
-      );
+      )
+      .addCase(saveUserScore.rejected, (state) => {
+        state.loading = false;
+      });
   },
 });
 
