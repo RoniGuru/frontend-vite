@@ -36,6 +36,10 @@ const gameSlice = createSlice({
       state.currentWord = pickRandomWord(state.words);
       state.score += 1;
     },
+    resetGame: (state) => {
+      state.gameState = 'waiting';
+      state.currentWord = '';
+    },
   },
 });
 
@@ -44,5 +48,5 @@ function pickRandomWord(words: string[]) {
   return words[randomIndex];
 }
 
-export const { startGame, endGame, nextWord } = gameSlice.actions;
+export const { startGame, endGame, nextWord, resetGame } = gameSlice.actions;
 export default gameSlice.reducer;

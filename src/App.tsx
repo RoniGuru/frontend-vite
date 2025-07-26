@@ -23,8 +23,15 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route
+                path="/game"
+                element={
+                  <ProtectedRoute>
+                    <Game />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/auth" element={<Auth />} />
-              <Route path="/game" element={<Game />} />
             </Routes>
           </BrowserRouter>
         </PersistGate>

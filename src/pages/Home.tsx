@@ -11,11 +11,13 @@ const Home = () => {
       <div>
         welcome {user?.name} your id is {user?.id}
       </div>
-      <Link to="/Auth">go to login</Link>
 
       <button onClick={get} className="p-4 bg-slate-400 w-36 ">
         Get User
       </button>
+      <Link to="/game" className="p-4 bg-slate-400 w-36 ">
+        Play Game
+      </Link>
       <button className="btn-primary" onClick={logout}>
         Logout
       </button>
