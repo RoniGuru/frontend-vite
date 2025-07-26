@@ -1,13 +1,18 @@
-import { useSelector } from 'react-redux';
-import type { RootState } from '../state/store';
-
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import type { RootState, AppDispatch } from '../state/store';
+import { useState, useEffect } from 'react';
 import Waiting from '../components/Game/Waiting';
 import Play from '../components/Game/Play';
 import Finished from '../components/Game/Finished';
+import { resetGame } from '../state/game/gameSlice';
 
 const Game = () => {
   const [userInput, setUserInput] = useState<string>('');
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(resetGame());
+  }, [dispatch]);
 
   const game = useSelector((state: RootState) => state.game);
   const renderGameContent = () => {
