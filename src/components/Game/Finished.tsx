@@ -9,6 +9,9 @@ const Finished = () => {
   const userState = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch<AppDispatch>();
 
+  const currentHighScore = userState.user.high_score || 0;
+  const isNewHighScore = game.score > currentHighScore;
+
   async function saveScore() {
     try {
       const result = dispatch(
@@ -29,13 +32,35 @@ const Finished = () => {
   }
 
   return (
-    <div>
-      <p>Your score was : {game.score}</p>
-      <p>Your high score is : {userState.user.high_score}</p>
-      <button onClick={PlayAgain}>Play Again</button>
-      <button onClick={saveScore}>Save Score</button>
+    <div className="flex flex-col gap-2 text-center font-bold w-full items-center">
+      {isNewHighScore ? (
+        <p className="text-green-400 "> New High Score: {game.score}!</p>
+      ) : (
+        <p className="">Your score is : {game.score}</p>
+      )}
 
-      <Link to="/"> Go back Home</Link>
+      <p className="text-white">
+        Your current high score is : {userState.user.high_score || 0}
+      </p>
+      <button
+        className="px-6 py-3 mt-4 bg-green-600 text-white rounded-lg hover:bg-gray-400 transition-colors duration-200 w-3/4"
+        onClick={saveScore}
+      >
+        Save Score
+      </button>
+      <button
+        className="px-6 py-3 mt-4 bg-gray-600 text-white rounded-lg hover:bg-gray-400 transition-colors duration-200  w-3/4"
+        onClick={PlayAgain}
+      >
+        Play Again
+      </button>
+
+      <Link
+        to="/"
+        className="px-6 py-3 mt-4 bg-gray-600 text-white rounded-lg hover:bg-gray-400 transition-colors duration-200  w-3/4"
+      >
+        Home
+      </Link>
     </div>
   );
 };
