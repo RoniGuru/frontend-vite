@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import type { AppDispatch, RootState } from '../../state/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveUserScore } from '../../state/user/userSlice';
+import { startGame } from '../../state/game/gameSlice';
 
 const Finished = () => {
   const game = useSelector((state: RootState) => state.game);
@@ -23,11 +24,17 @@ const Finished = () => {
     }
   }
 
+  async function PlayAgain() {
+    dispatch(startGame());
+  }
+
   return (
     <div>
       <p>Your score was : {game.score}</p>
       <p>Your high score is : {userState.user.high_score}</p>
+      <button onClick={PlayAgain}>Play Again</button>
       <button onClick={saveScore}>Save Score</button>
+
       <Link to="/"> Go back Home</Link>
     </div>
   );
