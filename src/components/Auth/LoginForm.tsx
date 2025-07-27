@@ -1,34 +1,19 @@
 import { useState } from 'react';
-import { api } from '../../api/api';
 import { useNavigate } from 'react-router-dom';
-
-import type { LoginResponseData } from '../../Context/Auth/type';
-import type { AppDispatch } from '../../state/store';
-import { useDispatch } from 'react-redux';
-import { setUser } from '../../state/user/userSlice';
+import { useAuth } from '../../Context/Auth/useAuth';
 
 const LoginForm = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const dispatch = useDispatch<AppDispatch>();
-
   const navigate = useNavigate();
 
+  const { login } = useAuth();
+
   const handleLogin = async () => {
-    try {
-      const response = await api.post('/login', { name: username, password });
-      console.log('response ', response);
-      if (response.status === 200) {
-        const data: LoginResponseData = response.data;
-        dispatch(setUser(data.user));
-        api.defaults.headers.common[
-          'Authorization'
-        ] = `Bearer ${data.accessToken}`;
-        navigate('/');
-      }
-    } catch (error) {
-      console.log(error);
+    const result = await login(username, password);
+    if (result) {
+      navigate('/');
     }
   };
   return (
