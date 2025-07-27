@@ -30,7 +30,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
-  async function logout(): Promise<boolean> {
+  async function register(name: string, password: string) {
+    try {
+      const response = await api.post('/register', {
+        name,
+        password,
+      });
+
+      if (response.status === 200) {
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function logout() {
     if (user) {
       const response = await api.post(`/logout/${user.id}`);
       console.log(response);
@@ -41,10 +56,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         //set refresh token to empty
         document.cookie =
           'refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        return true;
       }
     }
-    return false;
   }
 
   async function get() {
@@ -59,6 +72,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     logout,
     get,
     login,
+    register,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
