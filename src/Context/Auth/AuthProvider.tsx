@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setIsLoading(true);
     try {
       const response = await api.post('/login', { name, password });
-      console.log('response ', response);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       if (response.status === 200) {
         const data: LoginResponseData = response.data;
         dispatch(setUser(data.user));
