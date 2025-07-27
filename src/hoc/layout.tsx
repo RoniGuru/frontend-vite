@@ -4,7 +4,13 @@ import { useSelector } from 'react-redux';
 import type { RootState } from '../state/store';
 import { useAuth } from '../Context/Auth/useAuth';
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
+const RootLayout = ({
+  children,
+  hideNav,
+}: {
+  children: React.ReactNode;
+  hideNav?: boolean;
+}) => {
   const { isLoading } = useAuth();
   const stateLoading = useSelector(
     (state: RootState) => state.user.loading || false
@@ -12,7 +18,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="h-full w-full">
-      <NavBar />
+      {hideNav ? null : <NavBar />}
       {isLoading || stateLoading ? <LoadingScreen /> : null}
 
       {children}
