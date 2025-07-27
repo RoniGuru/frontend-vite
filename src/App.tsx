@@ -7,6 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './state/store';
 import Game from './pages/Game';
 import { Provider } from 'react-redux';
+import RootLayout from './hoc/layout';
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
                 path="/"
                 element={
                   <ProtectedRoute>
-                    <Home />
+                    <RootLayout>
+                      <Home />
+                    </RootLayout>
                   </ProtectedRoute>
                 }
               />
@@ -27,7 +30,9 @@ function App() {
                 path="/game"
                 element={
                   <ProtectedRoute>
-                    <Game />
+                    <RootLayout>
+                      <Game />
+                    </RootLayout>
                   </ProtectedRoute>
                 }
               />
