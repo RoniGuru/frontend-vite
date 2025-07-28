@@ -10,7 +10,7 @@ interface userState {
   loading: boolean;
 }
 
-export const initialState: userState = {
+const initialState: userState = {
   user: { id: 0, name: '', created_at: '', high_score: 0 },
   loading: false,
 };
