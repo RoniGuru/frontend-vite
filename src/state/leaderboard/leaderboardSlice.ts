@@ -1,10 +1,10 @@
+import { api } from '../../api/api';
+import axios from 'axios';
 import {
   createAsyncThunk,
   createSlice,
   type PayloadAction,
 } from '@reduxjs/toolkit';
-import { api } from '../../api/api';
-import axios from 'axios';
 
 interface leaderboardData {
   id: number;
