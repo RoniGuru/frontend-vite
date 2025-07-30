@@ -28,7 +28,7 @@ const Game = () => {
   };
 
   return (
-    <div className="bg-gray-900 h-screen w-screen  flex justify-center items-center ">
+    <div className=" h-screen w-screen  flex justify-center items-center ">
       <div className="text-3xl bg-slate-500 rounded-lg   w-1/2 h-3/4 py-16 flex justify-center flex-col items-center gap-4 ">
         {/* Buttons */}
         <div className="flex justify-center ">{renderGameContent()}</div>

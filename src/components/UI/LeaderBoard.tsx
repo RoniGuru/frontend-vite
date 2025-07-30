@@ -11,13 +11,38 @@ const LeaderBoard = () => {
     dispatch(getLeaderBoard());
   }, [dispatch]);
 
+  function handleGetLeaderboard() {
+    dispatch(getLeaderBoard());
+  }
+
   return (
-    <div className="bg-red-500 flex ">
-      {leaderboardState.leaderboard.map((entry, index) => (
-        <div key={index} className="bg-slate-400">
-          {entry.name}: {entry.high_score}
-        </div>
-      ))}
+    <div className="bg-gray-900 flex flex-col h-96 w-64 border border-gray-600">
+      <h1 className="text-center text-white font-bold py-2 bg-gray-800">
+        Leader Board
+      </h1>
+      <div className="flex flex-col flex-1 gap-1">
+        {Array.from({ length: 10 }, (_, index) => {
+          const entry = leaderboardState.leaderboard[index];
+          return (
+            <div
+              key={index}
+              className="flex justify-between   px-1 border-b border-gray-600 text-white"
+            >
+              <span className="text-gray-400">#{index + 1}</span>
+              <span className="flex-1 mx-2">{entry ? entry.name : '---'}</span>
+              <span className="font-mono">
+                {entry ? entry.high_score : '---'}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+      <button
+        onClick={handleGetLeaderboard}
+        className="bg-slate-400 hover:bg-slate-700 text-white h-full font-bold"
+      >
+        Refresh
+      </button>
     </div>
   );
 };

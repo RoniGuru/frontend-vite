@@ -17,7 +17,7 @@ const RootLayout = ({
   );
 
   return (
-    <div className="h-full w-full">
+    <div className="h-screen w-screen bg-gray-900">
       {hideNav ? null : <NavBar />}
       {isLoading || stateLoading ? <LoadingScreen /> : null}
 
