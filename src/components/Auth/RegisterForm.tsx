@@ -11,9 +11,20 @@ const RegisterForm = () => {
   const handleRegister = async () => {
     if (password != confirmPassword) {
       alert('passwords do not match');
+      return;
+    } else if (password.length < 7) {
+      alert('password should be not be less then 7 characters');
+      return;
+    } else if (username.length < 7) {
+      alert('username should be not be less then 7 characters');
+      return;
     }
 
-    register(username, password);
+    const response = await register(username, password);
+
+    if (response) {
+      alert(response);
+    }
   };
   return (
     <div className="flex flex-col gap-1 h-3/4  justify-between">

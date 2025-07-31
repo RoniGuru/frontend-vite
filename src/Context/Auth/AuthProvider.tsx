@@ -7,6 +7,7 @@ import type { RootState, AppDispatch } from '../../state/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser, setUser } from '../../state/user/userSlice';
 import type { LoginResponseData } from './type';
+import { AxiosError } from 'axios';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const user = useSelector((state: RootState) => state.user.user);
@@ -40,16 +41,38 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   async function register(name: string, password: string) {
     setIsLoading(true);
     try {
+      console.log('trying');
       const response = await api.post('/register', {
         name,
         password,
       });
 
+      console.log(response);
+
       if (response.status === 200) {
         window.location.reload();
+      } else if (response.status === 400) {
+        console.log('returning ', response.data);
+        return response.data;
       }
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        if (error.response) {
+          console.log('Server error:', error.response.data);
+          return error.response.data;
+        }
+        if (error.request) {
+          console.log('Network error:', error.message);
+          return 'Network error occurred';
+        }
+      }
+
+      if (error instanceof Error) {
+        console.log('Error:', error.message);
+        return error.message;
+      }
+
+      return 'An unknown error occurred';
     } finally {
       setIsLoading(false);
     }
