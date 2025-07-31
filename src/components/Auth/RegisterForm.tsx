@@ -22,8 +22,10 @@ const RegisterForm = () => {
 
     const response = await register(username, password);
 
-    if (response) {
-      alert(response);
+    if (response.success) {
+      window.location.reload();
+    } else {
+      alert(response.error || 'registration error');
     }
   };
   return (

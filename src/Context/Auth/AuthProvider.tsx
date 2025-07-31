@@ -60,7 +60,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsLoading(false);
     }
   }
-  async function register(name: string, password: string) {
+  async function register(
+    name: string,
+    password: string
+  ): Promise<{ success: boolean; error?: string }> {
     setIsLoading(true);
     try {
       console.log('trying');
@@ -72,29 +75,29 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       console.log(response);
 
       if (response.status === 200) {
-        window.location.reload();
-      } else if (response.status === 400) {
-        console.log('returning ', response.data);
-        return response.data;
+        return { success: true };
       }
+      return { success: false, error: 'registration failed' };
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response) {
           console.log('Server error:', error.response.data);
-          return error.response.data;
+          return { success: false, error: error.response.data };
         }
         if (error.request) {
           console.log('Network error:', error.message);
-          return 'Network error occurred';
+
+          return { success: false, error: 'Network error occurred' };
         }
       }
 
       if (error instanceof Error) {
         console.log('Error:', error.message);
-        return error.message;
+
+        return { success: false, error: error.message };
       }
 
-      return 'An unknown error occurred';
+      return { success: false, error: 'An unknown error occurred' };
     } finally {
       setIsLoading(false);
     }
