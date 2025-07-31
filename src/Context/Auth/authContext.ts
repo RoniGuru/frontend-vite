@@ -2,7 +2,10 @@ import { createContext } from 'react';
 
 export type AuthContextType = {
   logout: () => void;
-  login: (name: string, password: string) => Promise<boolean>;
+  login: (
+    name: string,
+    password: string
+  ) => Promise<{ success: boolean; error?: string }>;
   register: (name: string, password: string) => Promise<void | string>;
   get: () => void;
   isLoading: boolean;

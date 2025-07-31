@@ -12,8 +12,10 @@ const LoginForm = () => {
 
   const handleLogin = async () => {
     const result = await login(username, password);
-    if (result) {
+    if (result.success) {
       navigate('/');
+    } else {
+      alert(result.error || 'Login failed');
     }
   };
   return (

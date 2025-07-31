@@ -16,28 +16,50 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Single loading state for all auth operations
   const [isLoading, setIsLoading] = useState(false);
 
-  async function login(name: string, password: string): Promise<boolean> {
+  async function login(
+    name: string,
+    password: string
+  ): Promise<{ success: boolean; error?: string }> {
     setIsLoading(true);
     try {
       const response = await api.post('/login', { name, password });
       await new Promise((resolve) => setTimeout(resolve, 1000));
+
       if (response.status === 200) {
         const data: LoginResponseData = response.data;
         dispatch(setUser(data.user));
         api.defaults.headers.common[
           'Authorization'
         ] = `Bearer ${data.accessToken}`;
-        return true;
+        return { success: true };
       }
-      return false;
+
+      return { success: false, error: 'Login failed' };
     } catch (error) {
-      console.log(error);
-      return false;
+      if (error instanceof AxiosError) {
+        if (error.response) {
+          console.log('Server error:', error.response.data);
+          return {
+            success: false,
+            error: error.response.data || 'Server error occurred',
+          };
+        }
+        if (error.request) {
+          console.log('Network error:', error.message);
+          return { success: false, error: 'Network error occurred' };
+        }
+      }
+
+      if (error instanceof Error) {
+        console.log('Error:', error.message);
+        return { success: false, error: error.message };
+      }
+
+      return { success: false, error: 'An unknown error occurred' };
     } finally {
       setIsLoading(false);
     }
   }
-
   async function register(name: string, password: string) {
     setIsLoading(true);
     try {
