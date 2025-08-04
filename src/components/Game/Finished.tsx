@@ -3,6 +3,7 @@ import type { AppDispatch, RootState } from '../../state/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveUserScore } from '../../state/user/userSlice';
 import { startGame } from '../../state/game/gameSlice';
+import toast from 'react-hot-toast';
 
 const Finished = () => {
   const game = useSelector((state: RootState) => state.game);
@@ -23,7 +24,16 @@ const Finished = () => {
         console.log('score not saved');
       }
     } catch (error) {
-      console.log('Unexpected error:', error);
+      const errorMessage =
+        error instanceof Error ? error.message : 'Save Error occurred';
+
+      toast.error(errorMessage, {
+        duration: 10000,
+        style: {
+          background: '#363636',
+          color: '#fff',
+        },
+      });
     }
   }
 

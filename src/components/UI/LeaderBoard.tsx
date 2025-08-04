@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import type { AppDispatch, RootState } from '../../state/store';
 import { useEffect } from 'react';
 import { getLeaderBoard } from '../../state/leaderboard/leaderboardSlice';
+import toast from 'react-hot-toast';
 
 const LeaderBoard = () => {
   const leaderboardState = useSelector((state: RootState) => state.leaderboard);
@@ -12,7 +13,22 @@ const LeaderBoard = () => {
   }, [dispatch]);
 
   function handleGetLeaderboard() {
-    dispatch(getLeaderBoard());
+    try {
+      dispatch(getLeaderBoard());
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : 'Error trying to get leaderboard';
+
+      toast.error(errorMessage, {
+        duration: 10000,
+        style: {
+          background: '#363636',
+          color: '#fff',
+        },
+      });
+    }
   }
 
   return (

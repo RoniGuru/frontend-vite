@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/Auth/useAuth';
+import toast from 'react-hot-toast';
 
 const LoginForm = () => {
   const [username, setUsername] = useState<string>('');
@@ -15,7 +16,14 @@ const LoginForm = () => {
     if (result.success) {
       navigate('/');
     } else {
-      alert(result.error || 'Login failed');
+      // alert(result.error || 'Login failed');
+      toast.error(result.error || 'Login failed', {
+        duration: 10000,
+        style: {
+          background: '#363636',
+          color: '#fff',
+        },
+      });
     }
   };
   return (

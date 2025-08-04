@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../../Context/Auth/useAuth';
+import toast from 'react-hot-toast';
 
 const RegisterForm = () => {
   const [username, setUsername] = useState<string>('');
@@ -25,7 +26,13 @@ const RegisterForm = () => {
     if (response.success) {
       window.location.reload();
     } else {
-      alert(response.error || 'registration error');
+      toast.error(response.error || 'Registration  failed', {
+        duration: 10000,
+        style: {
+          background: '#363636',
+          color: '#fff',
+        },
+      });
     }
   };
   return (

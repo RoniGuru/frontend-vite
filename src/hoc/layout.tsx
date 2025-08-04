@@ -3,6 +3,7 @@ import NavBar from '../components/UI/NavBar';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../state/store';
 import { useAuth } from '../Context/Auth/useAuth';
+import { Toaster } from 'react-hot-toast';
 
 const RootLayout = ({
   children,
@@ -19,6 +20,7 @@ const RootLayout = ({
   return (
     <div className="h-screen w-screen bg-gray-900">
       {hideNav ? null : <NavBar />}
+      <Toaster />
       {isLoading || stateLoading ? <LoadingScreen /> : null}
 
       {children}
