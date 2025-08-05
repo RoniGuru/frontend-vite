@@ -12,7 +12,7 @@ interface gameData {
 
 export const initialState: gameData = {
   gameState: 'waiting',
-  time: 10,
+  time: 60,
   score: 0,
   words: wordBank,
   currentWord: '',
