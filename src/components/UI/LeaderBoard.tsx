@@ -32,9 +32,9 @@ const LeaderBoard = () => {
   }
 
   return (
-    <div className="bg-gray-900 flex flex-col h-96 w-64 border border-gray-600">
+    <div className="bg-gray-900 flex flex-col w-[500px] h-[650px] border border-gray-600 text-2xl">
       <h1 className="text-center text-white font-bold py-2 bg-gray-800">
-        Leader Board
+        Leaderboard
       </h1>
       <div className="flex flex-col flex-1 gap-1">
         {Array.from({ length: 10 }, (_, index) => {
@@ -42,7 +42,7 @@ const LeaderBoard = () => {
           return (
             <div
               key={index}
-              className="flex justify-between   px-1 border-b border-gray-600 text-white"
+              className="flex justify-between   px-4 py-2 border-b border-gray-600 text-white"
             >
               <span className="text-gray-400">#{index + 1}</span>
               <span className="flex-1 mx-2">{entry ? entry.name : '---'}</span>
