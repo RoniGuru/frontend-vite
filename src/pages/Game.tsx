@@ -28,10 +28,12 @@ const Game = () => {
   };
 
   return (
-    <div className=" h-screen w-screen  flex justify-center items-center ">
-      <div className="text-3xl bg-slate-500 rounded-lg   w-1/2 h-3/4 py-16 flex justify-center flex-col items-center gap-4 ">
+    <div className=" h-screen w-screen  flex justify-center items-center  ">
+      <div className="text-5xl bg-slate-500 rounded-lg h-4/5 w-4/5   flex justify-center flex-col items-center gap-4 ">
         {/* Buttons */}
-        <div className="flex justify-center ">{renderGameContent()}</div>
+        <div className="flex justify-center h-full items-center ">
+          {renderGameContent()}
+        </div>
       </div>
     </div>
   );

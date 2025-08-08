@@ -15,16 +15,16 @@ const Waiting = ({
     setUserInput('');
   }
   return (
-    <div className="flex flex-col text-center">
+    <div className="flex flex-col text-center justify-center">
       <button
-        className="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-400 transition-colors duration-200 font-semibold"
+        className="px-8 py-5 w-96  bg-gray-600 text-white rounded-lg hover:bg-gray-400 transition-colors duration-200 font-semibold "
         onClick={handleStart}
       >
         Start Game
       </button>
       <Link
         to="/"
-        className="px-6 py-3 mt-4 bg-gray-600 text-white rounded-lg hover:bg-gray-400 transition-colors duration-200 font-semibold"
+        className="px-8 py-5 w-96 mt-4 bg-gray-600 text-white rounded-lg hover:bg-gray-400 transition-colors duration-200 font-semibold"
       >
         Go Back
       </Link>

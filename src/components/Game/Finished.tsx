@@ -42,24 +42,24 @@ const Finished = () => {
   }
 
   return (
-    <div className="flex flex-col gap-2 text-center font-bold w-full items-center">
-      {isNewHighScore ? (
-        <p className="text-green-400 "> New High Score: {game.score}!</p>
-      ) : (
-        <p className="">Your score is : {game.score}</p>
-      )}
+    <div className="flex flex-col gap-2 text-center font-bold w-full items-center justify-center">
+      <div className="mb-10 gap-2 flex flex-col">
+        {isNewHighScore ? (
+          <p className="text-green-400 "> New High Score: {game.score}!</p>
+        ) : (
+          <p className="">Your score is : {game.score}</p>
+        )}
+        <p>Your current high score is : {userState.user.high_score || 0}</p>
+      </div>
 
-      <p className="text-white">
-        Your current high score is : {userState.user.high_score || 0}
-      </p>
       <button
-        className="px-6 py-3 mt-4 bg-green-600 text-white rounded-lg hover:bg-gray-400 transition-colors duration-200 w-3/4"
+        className="px-8 py-5 w-96  mt-4 bg-green-600 text-white rounded-lg hover:bg-gray-400 transition-colors duration-200 "
         onClick={saveScore}
       >
         Save Score
       </button>
       <button
-        className="px-6 py-3 mt-4 bg-gray-600 text-white rounded-lg hover:bg-gray-400 transition-colors duration-200  w-3/4"
+        className="px-8 py-5 w-96  mt-4 bg-gray-600 text-white rounded-lg hover:bg-gray-400 transition-colors duration-200  "
         onClick={PlayAgain}
       >
         Play Again
@@ -67,7 +67,7 @@ const Finished = () => {
 
       <Link
         to="/"
-        className="px-6 py-3 mt-4 bg-gray-600 text-white rounded-lg hover:bg-gray-400 transition-colors duration-200  w-3/4"
+        className="px-8 py-5 w-96  mt-4 bg-gray-600 text-white rounded-lg hover:bg-gray-400 transition-colors duration-200 "
       >
         Home
       </Link>

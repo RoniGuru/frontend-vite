@@ -15,7 +15,7 @@ const Home = () => {
           </div>
           <Link
             to="/game"
-            className=" bg-slate-400 w-[500px] h-[200px]   font-bold rounded-lg hover:bg-slate-700  text-5xl  flex items-center justify-center"
+            className=" bg-slate-400 w-[400px] h-[100px]   font-bold rounded-lg hover:bg-slate-700  text-5xl  flex items-center justify-center"
           >
             Play Game
           </Link>

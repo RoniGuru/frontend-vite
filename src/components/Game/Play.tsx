@@ -28,7 +28,7 @@ const Play = ({
   }
 
   return (
-    <div className="items-center gap-6 flex flex-col justify-between ">
+    <div className="items-center gap-6 flex flex-col justify-between h-4/5  ">
       {/*Score and Time */}
       <div className="flex gap-4  font-bold bg-gray-300 rounded-lg p-4">
         <div className="px-4 py-2">score : {game.score}</div>
@@ -42,11 +42,11 @@ const Play = ({
         <input
           value={userInput}
           onChange={handleInputChange}
-          className="p-2 mt-6 rounded-lg  focus:outline-none focus:ring-2 focus:ring-gray-800"
+          className="p-2 mt-6  rounded-lg  focus:outline-none focus:ring-2 focus:ring-gray-800"
         />
       </div>
       <button
-        className="px-6 py-3 mt-4 bg-gray-600 text-white rounded-lg hover:bg-gray-400 transition-colors duration-200 font-semibold"
+        className="px-8 py-5 w-96  mt-4 bg-gray-600 text-white rounded-lg hover:bg-gray-400 transition-colors duration-200 font-semibold"
         onClick={handleEnd}
       >
         End Game
