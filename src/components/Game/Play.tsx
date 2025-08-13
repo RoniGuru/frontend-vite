@@ -14,7 +14,7 @@ const Play = ({
   const dispatch = useDispatch<AppDispatch>();
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value;
+    const value = e.target.value.trim();
     setUserInput(value);
 
     if (value.toLowerCase() === game.currentWord.toLowerCase()) {
@@ -24,6 +24,7 @@ const Play = ({
   }
 
   function handleEnd() {
+    setUserInput('');
     dispatch(endGame());
   }
 
