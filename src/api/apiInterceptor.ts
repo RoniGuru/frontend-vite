@@ -1,9 +1,23 @@
 import { api } from './api';
 import { store } from '../state/store';
 import { clearUser } from '../state/user/userSlice';
+
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // Check if server sent a new access token in response headers
+    const newToken =
+      response.headers['authorization'] || response.headers['Authorization'];
+    if (newToken) {
+      const token = newToken.split(' ')[1];
+      if (token) {
+        api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        localStorage.setItem('accessToken', token);
+      }
+    }
+    return response;
+  },
   (error) => {
+    // Only logout on complete auth failures
     if (
       error.response?.status === 401 &&
       (error.response?.data.error === 'No refresh token provided' ||
@@ -12,8 +26,9 @@ api.interceptors.response.use(
     ) {
       store.dispatch(clearUser());
       api.defaults.headers.common['Authorization'] = '';
+      localStorage.removeItem('accessToken');
       document.cookie =
-        'refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        'refresh_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     }
     return Promise.reject(error);
   }

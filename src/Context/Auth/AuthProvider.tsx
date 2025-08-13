@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       if (response.status === 200) {
         const data: LoginResponseData = response.data;
+
         dispatch(setUser(data.user));
         api.defaults.headers.common[
           'Authorization'
