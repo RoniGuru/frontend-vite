@@ -32,7 +32,7 @@ const LeaderBoard = () => {
   }
 
   return (
-    <div className="bg-gray-900 flex flex-col w-[500px] h-[650px] border border-gray-600 text-2xl">
+    <div className="bg-gray-900 flex flex-col w-[500px] h-[650px] border border-gray-600 text-2xl absolute top-40 left-20">
       <h1 className="text-center text-white font-bold py-2 bg-gray-800">
         Leaderboard
       </h1>
