@@ -5,7 +5,7 @@ import RegisterForm from './RegisterForm';
 const AuthForm = () => {
   const [login, setLogin] = useState<boolean>(true);
   return (
-    <div className="bg-white w-1/3 h-2/3  rounded-md p-6">
+    <div className="bg-white  h-[550px]  rounded-md p-6 w-[450px]">
       {login ? <LoginForm /> : <RegisterForm />}
 
       <button
