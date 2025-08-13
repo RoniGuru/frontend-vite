@@ -41,6 +41,7 @@ const Play = ({
         </div>
         <input
           value={userInput}
+          autoFocus
           onChange={handleInputChange}
           className="p-2 mt-6  rounded-lg  focus:outline-none focus:ring-2 focus:ring-gray-800"
         />
