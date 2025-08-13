@@ -12,7 +12,7 @@ const AuthForm = () => {
         className="mt-4 mb-10 w-full bg-gray-600 py-4  hover:bg-slate-700 rounded-md font-medium  duration-300 ease-out text-white text-2xl"
         onClick={() => setLogin(!login)}
       >
-        {login ? 'switch to register' : 'switch to login'}
+        {login ? 'Switch to Register' : 'Switch to Login'}
       </button>
     </div>
   );
