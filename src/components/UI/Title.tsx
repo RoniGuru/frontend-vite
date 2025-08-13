@@ -1,5 +1,5 @@
 const Title = () => {
-  return <h1 className="text-8xl font-bold font-sans">WordBlitz</h1>;
+  return <h1 className="text-8xl font-bold font-sans text-white">WordBlitz</h1>;
 };
 
 export default Title;

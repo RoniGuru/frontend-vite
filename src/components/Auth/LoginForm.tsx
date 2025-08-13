@@ -48,7 +48,7 @@ const LoginForm = () => {
       </div>
 
       <button
-        className="  w-full bg-blue-500 py-4  rounded-md font-medium hover:bg-blue-700 duration-300 ease-out text-white"
+        className="  w-full bg-gray-600  hover:bg-slate-700 py-4  rounded-md font-medium  duration-300 ease-out text-white"
         onClick={handleLogin}
       >
         Login

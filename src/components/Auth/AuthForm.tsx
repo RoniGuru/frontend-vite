@@ -9,7 +9,7 @@ const AuthForm = () => {
       {login ? <LoginForm /> : <RegisterForm />}
 
       <button
-        className="mt-4 mb-10 w-full bg-blue-500 py-4  rounded-md font-medium hover:bg-blue-700 duration-300 ease-out text-white text-2xl"
+        className="mt-4 mb-10 w-full bg-gray-600 py-4  hover:bg-slate-700 rounded-md font-medium  duration-300 ease-out text-white text-2xl"
         onClick={() => setLogin(!login)}
       >
         {login ? 'switch to register' : 'switch to login'}
