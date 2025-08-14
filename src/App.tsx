@@ -8,6 +8,7 @@ import { persistor, store } from './state/store';
 import Game from './pages/Game';
 import { Provider } from 'react-redux';
 import RootLayout from './hoc/layout';
+import User from './pages/User';
 
 function App() {
   return (
@@ -41,6 +42,14 @@ function App() {
                 element={
                   <RootLayout hideNav={true}>
                     <Auth />
+                  </RootLayout>
+                }
+              />
+              <Route
+                path="/user"
+                element={
+                  <RootLayout hideNav={true}>
+                    <User />
                   </RootLayout>
                 }
               />

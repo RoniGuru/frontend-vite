@@ -1,4 +1,5 @@
 import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
+import { Link } from 'react-router-dom';
 
 const SettingModal = ({
   isOpen,
@@ -33,6 +34,9 @@ const SettingModal = ({
               >
                 Settings
               </DialogTitle>
+              <Link className="text-base/7 font-medium text-white" to="/user">
+                Update User
+              </Link>
 
               <div className="mt-4">
                 <Button
