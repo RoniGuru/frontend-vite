@@ -1,5 +1,5 @@
 import LoadingScreen from '../components/UI/LoadingScreen';
-import NavBar from '../components/UI/NavBar';
+import NavBar from '../components/UI/Nav/NavBar';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../state/store';
 import { useAuth } from '../Context/Auth/useAuth';
