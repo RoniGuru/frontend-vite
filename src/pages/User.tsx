@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import UpdatePasswordForm from '../components/User/UpdatePasswordForm';
+import UpdateNameForm from '../components/User/UpdateNameForm';
 
 const User = () => {
   const navigate = useNavigate();
@@ -9,7 +11,7 @@ const User = () => {
   return (
     <div className="w-full h-full flex justify-center">
       <div className="w-1/3 bg-slate-400 p-5 h-2/3 rounded-2xl">
-        <h1 className="text-4xl text-white text-center">User</h1>
+        <h1 className="text-4xl text-white text-center font-bold mb-2">User</h1>
         {/* tab */}
         <div className="flex mb-6 bg-gray-800 rounded-lg p-1">
           <button
@@ -34,7 +36,7 @@ const User = () => {
           </button>
         </div>
 
-        {activeTab === 'username' ? 'update username' : 'update password'}
+        {activeTab === 'username' ? <UpdateNameForm /> : <UpdatePasswordForm />}
 
         {/* Back Link */}
         <div className="mt-6 text-center">
