@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import type { RootState } from '../state/store';
 import { useSelector } from 'react-redux';
 import LeaderBoard from '../components/UI/LeaderBoard';
+
 const Home = () => {
   const user = useSelector((state: RootState) => state.user.user);
 

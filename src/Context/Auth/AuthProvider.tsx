@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { useState } from 'react';
 import { AuthContext } from './authContext';
 import type { AuthContextType } from './authContext';
-import { api } from '../../api/api';
+import { api } from '../../api/index';
 import type { RootState, AppDispatch } from '../../state/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser, setUser } from '../../state/user/userSlice';

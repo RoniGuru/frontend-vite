@@ -4,9 +4,9 @@ import {
   type PayloadAction,
 } from '@reduxjs/toolkit';
 import type { UpdateUserDTO, User } from '../../Context/Auth/type';
-import { api } from '../../api/api';
 import type { updateResponse } from './userResponse';
 import axios from 'axios';
+import { api } from '../../api/api';
 
 interface userState {
   user: User;

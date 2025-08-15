@@ -4,9 +4,13 @@ import { clearUser } from '../state/user/userSlice';
 
 api.interceptors.response.use(
   (response) => {
+    // Debug ALL response headers
+    console.log('All response headers:', response.headers);
+
     // Check if server sent a new access token in response headers
     const newToken =
       response.headers['authorization'] || response.headers['Authorization'];
+
     if (newToken) {
       const token = newToken.split(' ')[1];
       if (token) {
@@ -17,6 +21,7 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
+    console.log('error');
     // Only logout on complete auth failures
     if (
       error.response?.status === 401 &&
