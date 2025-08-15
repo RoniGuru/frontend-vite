@@ -1,6 +1,4 @@
 import { api } from './api';
-import { store } from '../state/store';
-import { clearUser } from '../state/user/userSlice';
 
 api.interceptors.response.use(
   (response) => {
@@ -29,7 +27,7 @@ api.interceptors.response.use(
         error.response?.data.error ===
           'Invalid refresh token. Please login again.')
     ) {
-      store.dispatch(clearUser());
+      localStorage.clear();
       api.defaults.headers.common['Authorization'] = '';
       localStorage.removeItem('accessToken');
       document.cookie =

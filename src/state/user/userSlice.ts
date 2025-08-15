@@ -6,7 +6,7 @@ import {
 import type { UpdateUserDTO, User } from '../../Context/Auth/type';
 import type { updateResponse } from './userResponse';
 import axios from 'axios';
-import { api } from '../../api/api';
+import { api } from '../../api/index';
 
 interface userState {
   user: User;
