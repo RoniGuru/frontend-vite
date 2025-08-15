@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
   type PayloadAction,
 } from '@reduxjs/toolkit';
-import type { User } from '../../Context/Auth/type';
+import type { UpdateUserDTO, User } from '../../Context/Auth/type';
 import { api } from '../../api/api';
 import type { updateResponse } from './userResponse';
 import axios from 'axios';
@@ -32,6 +32,45 @@ export const saveUserScore = createAsyncThunk(
         if (error.response) {
           return rejectWithValue({
             message: error.response.data?.message || 'Failed to save score',
+            status: error.response.status,
+          });
+        }
+        // Network error or request setup error
+        return rejectWithValue({
+          message: error.message || 'Network error occurred',
+          status: null,
+        });
+      }
+      // Non-axios error
+      return rejectWithValue({
+        message: 'An unexpected error occurred',
+        status: null,
+      });
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  'user/updateUser',
+  async (
+    {
+      update,
+      password,
+      id,
+    }: { update: Partial<UpdateUserDTO>; password: string; id: number },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await api.put(`/user/${id}`, { password, ...update });
+      const data: updateResponse = response.data;
+      return data.user;
+    } catch (error: unknown) {
+      // Handle axios errors
+      if (axios.isAxiosError(error)) {
+        // Server responded with error status
+        if (error.response) {
+          return rejectWithValue({
+            message: error.response.data?.message || 'Failed to update user',
             status: error.response.status,
           });
         }
