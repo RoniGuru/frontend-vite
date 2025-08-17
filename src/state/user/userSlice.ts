@@ -117,6 +117,21 @@ const userSlice = createSlice({
       )
       .addCase(saveUserScore.rejected, (state) => {
         state.loading = false;
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(
+        updateUser.fulfilled,
+        (state, action: PayloadAction<Partial<UpdateUserDTO>>) => {
+          state.loading = false;
+          if (action.payload.name) {
+            state.user.name = action.payload.name;
+          }
+        }
+      )
+      .addCase(updateUser.rejected, (state) => {
+        state.loading = false;
       });
   },
 });
