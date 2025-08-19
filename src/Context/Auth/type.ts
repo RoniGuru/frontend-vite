@@ -1,12 +1,12 @@
 export interface User {
   id: number;
-  name: string;
+  username: string;
   created_at: string;
   high_score: number;
 }
 
 export interface UpdateUserDTO {
-  name: string;
+  username: string;
   new_password: string;
 }
 

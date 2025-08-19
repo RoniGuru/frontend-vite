@@ -13,7 +13,7 @@ const UpdateNameForm = () => {
   function handleNameForm() {
     dispatch(
       updateUser({
-        update: { name: newUsername },
+        update: { username: newUsername },
         password,
         id: user.id,
       })

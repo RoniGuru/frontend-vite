@@ -11,7 +11,7 @@ const Home = () => {
       <LeaderBoard />
       <div className="h-4/5 flex flex-col items-center w-full  text-2xl justify-between">
         <div className="text-white text-7xl font-bold mt-10 ">
-          Welcome {user?.name}
+          Welcome {user?.username}
         </div>
         <Link
           to="/game"

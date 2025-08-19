@@ -14,7 +14,7 @@ interface userState {
 }
 
 const initialState: userState = {
-  user: { id: 0, name: '', created_at: '', high_score: 0 },
+  user: { id: 0, username: '', created_at: '', high_score: 0 },
   loading: false,
 };
 
@@ -63,7 +63,6 @@ export const updateUser = createAsyncThunk(
     try {
       const response = await api.put(`/user/${id}`, { password, ...update });
       const data: updateResponse = response.data;
-      console.log(response);
       return data.user;
     } catch (error: unknown) {
       // Handle axios errors
@@ -100,7 +99,7 @@ const userSlice = createSlice({
     clearUser: (state) => {
       state.user.id = 0;
       state.user.high_score = 0;
-      state.user.name = '';
+      state.user.username = '';
       state.user.created_at = '';
     },
   },
@@ -126,8 +125,8 @@ const userSlice = createSlice({
         updateUser.fulfilled,
         (state, action: PayloadAction<Partial<UpdateUserDTO>>) => {
           state.loading = false;
-          if (action.payload.name) {
-            state.user.name = action.payload.name;
+          if (action.payload.username) {
+            state.user.username = action.payload.username;
           }
         }
       )
