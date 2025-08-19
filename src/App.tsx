@@ -9,6 +9,7 @@ import Game from './pages/Game';
 import { Provider } from 'react-redux';
 import RootLayout from './hoc/layout';
 import User from './pages/User';
+import Setting from './pages/Setting';
 
 function App() {
   return (
@@ -51,6 +52,16 @@ function App() {
                   <RootLayout hideNav={true}>
                     <User />
                   </RootLayout>
+                }
+              />
+              <Route
+                path="/setting"
+                element={
+                  <ProtectedRoute>
+                    <RootLayout hideNav={true}>
+                      <Setting />
+                    </RootLayout>
+                  </ProtectedRoute>
                 }
               />
             </Routes>

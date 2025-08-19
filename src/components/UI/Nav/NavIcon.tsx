@@ -2,14 +2,13 @@ import { useSelector } from 'react-redux';
 import type { RootState } from '../../../state/store';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { useAuth } from '../../../Context/Auth/useAuth';
-import { useState } from 'react';
-import SettingModal from './SettingModal';
+import { Link } from 'react-router-dom';
 
 const NavIcon = () => {
   const { logout } = useAuth();
   const user = useSelector((state: RootState) => state.user.user);
   const initial = user.username[0];
-  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
       <Menu>
@@ -25,12 +24,12 @@ const NavIcon = () => {
           className="w-52 origin-top-right rounded-xl border border-white/5 bg-white/5 p-1 text-sm/6 text-white transition duration-100 ease-out [--anchor-gap:--spacing(1)] focus:outline-none "
         >
           <MenuItem>
-            <button
+            <Link
               className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 hover:bg-white/10"
-              onClick={() => setIsOpen(true)}
+              to="/setting"
             >
               Setting
-            </button>
+            </Link>
           </MenuItem>
 
           <div className="my-1 h-px bg-white/5" />
@@ -45,7 +44,6 @@ const NavIcon = () => {
           </MenuItem>
         </MenuItems>
       </Menu>
-      <SettingModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };
