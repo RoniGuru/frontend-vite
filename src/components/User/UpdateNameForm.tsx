@@ -7,7 +7,7 @@ const UpdateNameForm = () => {
   return (
     <div className="h-[400px]  flex flex-col gap-2 font-bold ">
       <div>
-        <label>New Password</label>
+        <label>New Username</label>
         <input
           value={newUsername}
           type="text"
@@ -20,7 +20,7 @@ const UpdateNameForm = () => {
         <label> Password</label>
         <input
           value={password}
-          type="text"
+          type="password"
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500  mb-4 "
           placeholder="Enter your password"
           onChange={(e) => setPassword(e.target.value)}

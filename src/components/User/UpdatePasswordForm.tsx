@@ -26,7 +26,7 @@ const UpdatePasswordForm = () => {
         <label>Old Password</label>
         <input
           value={password}
-          type="text"
+          type="password"
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500  mb-4 "
           placeholder="Enter your old password"
           onChange={(e) => setPassword(e.target.value)}
@@ -36,7 +36,7 @@ const UpdatePasswordForm = () => {
         <label>New Password</label>
         <input
           value={newPassword}
-          type="text"
+          type="password"
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500  mb-4 "
           placeholder="Enter your new password"
           onChange={(e) => setNewPassword(e.target.value)}
@@ -46,7 +46,7 @@ const UpdatePasswordForm = () => {
         <label>Confirm New Password</label>
         <input
           value={confirmNewPassword}
-          type="text"
+          type="password"
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500  mb-4 "
           placeholder="Confirm new password"
           onChange={(e) => setConfirmNewPassword(e.target.value)}

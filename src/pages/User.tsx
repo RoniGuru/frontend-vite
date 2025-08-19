@@ -9,8 +9,8 @@ const User = () => {
     'username'
   );
   return (
-    <div className="w-full h-full flex justify-center">
-      <div className="w-1/3 bg-slate-400 p-5 h-2/3 rounded-2xl">
+    <div className="w-full h-full flex justify-center ">
+      <div className="w-1/3 bg-slate-400 p-5 h-2/3 rounded-2xl mt-10">
         <h1 className="text-4xl text-white text-center font-bold mb-2">User</h1>
         {/* tab */}
         <div className="flex mb-6 bg-gray-800 rounded-lg p-1">
