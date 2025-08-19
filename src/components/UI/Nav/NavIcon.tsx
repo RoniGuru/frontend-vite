@@ -8,7 +8,7 @@ import SettingModal from './SettingModal';
 const NavIcon = () => {
   const { logout } = useAuth();
   const user = useSelector((state: RootState) => state.user.user);
-  const initial = user.name[0];
+  const initial = user.username[0];
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>

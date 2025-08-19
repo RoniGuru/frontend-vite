@@ -17,12 +17,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   async function login(
-    name: string,
+    username: string,
     password: string
   ): Promise<{ success: boolean; error?: string }> {
     setIsLoading(true);
     try {
-      const response = await api.post('/login', { name, password });
+      const response = await api.post('/login', { username, password });
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       if (response.status === 200) {
@@ -62,14 +62,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }
   async function register(
-    name: string,
+    username: string,
     password: string
   ): Promise<{ success: boolean; error?: string }> {
     setIsLoading(true);
     try {
       console.log('trying');
       const response = await api.post('/register', {
-        name,
+        username,
         password,
       });
 
