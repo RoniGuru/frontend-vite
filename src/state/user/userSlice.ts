@@ -11,11 +11,13 @@ import { api } from '../../api/index';
 interface userState {
   user: User;
   loading: boolean;
+  error: string;
 }
 
 const initialState: userState = {
   user: { id: 0, username: '', created_at: '', high_score: 0 },
   loading: false,
+  error: '',
 };
 
 export const saveUserScore = createAsyncThunk(
@@ -107,6 +109,7 @@ const userSlice = createSlice({
     builder
       .addCase(saveUserScore.pending, (state) => {
         state.loading = true;
+        state.error = '';
       })
       .addCase(
         saveUserScore.fulfilled,
@@ -120,6 +123,7 @@ const userSlice = createSlice({
       })
       .addCase(updateUser.pending, (state) => {
         state.loading = true;
+        state.error = '';
       })
       .addCase(
         updateUser.fulfilled,
@@ -132,6 +136,7 @@ const userSlice = createSlice({
       )
       .addCase(updateUser.rejected, (state) => {
         state.loading = false;
+        state.error = 'update user failed';
       });
   },
 });
