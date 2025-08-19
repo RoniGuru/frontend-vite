@@ -28,7 +28,6 @@ export const getLeaderBoard = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await api.get('/user/leaderboard');
-      console.log('leaderboard', response);
       const data: leaderboardData[] = response.data.leaderboard;
       return data;
     } catch (error: unknown) {

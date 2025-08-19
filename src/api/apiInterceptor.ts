@@ -2,9 +2,6 @@ import { api } from './api';
 
 api.interceptors.response.use(
   (response) => {
-    // Debug ALL response headers
-    console.log('All response headers:', response.headers);
-
     // Check if server sent a new access token in response headers
     const newToken =
       response.headers['authorization'] || response.headers['Authorization'];
@@ -19,7 +16,6 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log('error');
     // Only logout on complete auth failures
     if (
       error.response?.status === 401 &&

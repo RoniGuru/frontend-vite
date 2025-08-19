@@ -63,6 +63,7 @@ export const updateUser = createAsyncThunk(
     try {
       const response = await api.put(`/user/${id}`, { password, ...update });
       const data: updateResponse = response.data;
+      console.log(response);
       return data.user;
     } catch (error: unknown) {
       // Handle axios errors

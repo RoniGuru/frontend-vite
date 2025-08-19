@@ -1,9 +1,24 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState, AppDispatch } from '../../state/store';
+import { updateUser } from '../../state/user/userSlice';
+
 const UpdateNameForm = () => {
   const [newUsername, setNewUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  function handleNameForm() {}
+  const dispatch = useDispatch<AppDispatch>();
+  const user = useSelector((state: RootState) => state.user.user);
+
+  function handleNameForm() {
+    dispatch(
+      updateUser({
+        update: { name: newUsername },
+        password,
+        id: user.id,
+      })
+    );
+  }
   return (
     <div className="h-[400px]  flex flex-col gap-2 font-bold ">
       <div>
