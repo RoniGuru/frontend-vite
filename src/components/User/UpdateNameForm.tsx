@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { RootState, AppDispatch } from '../../state/store';
 import { updateUser } from '../../state/user/userSlice';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const UpdateNameForm = () => {
   const [newUsername, setNewUsername] = useState<string>('');
@@ -20,8 +21,16 @@ const UpdateNameForm = () => {
         id: userState.user.id,
       })
     );
-    if (userState.error != '') {
+    if (userState.error == '') {
       navigate('/');
+    } else {
+      toast.error(userState.error || 'Update  failed', {
+        duration: 10000,
+        style: {
+          background: '#363636',
+          color: '#fff',
+        },
+      });
     }
   }
   return (

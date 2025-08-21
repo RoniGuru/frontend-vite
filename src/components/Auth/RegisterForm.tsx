@@ -11,7 +11,7 @@ const RegisterForm = () => {
 
   const handleRegister = async () => {
     if (password != confirmPassword) {
-      toast.error('username should be not be less then 7 characters', {
+      toast.error('passwords should be same', {
         duration: 10000,
         style: {
           background: '#363636',
@@ -20,7 +20,7 @@ const RegisterForm = () => {
       });
       return;
     } else if (password.length < 7) {
-      toast.error('username should be not be less then 7 characters', {
+      toast.error('password should be not be less then 7 characters', {
         duration: 10000,
         style: {
           background: '#363636',

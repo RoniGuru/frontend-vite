@@ -41,7 +41,7 @@ const UpdatePasswordForm = () => {
       })
     );
 
-    if (userState.error != '') {
+    if (userState.error == '') {
       navigate('/');
     } else {
       toast.error(userState.error || 'Update  failed', {
