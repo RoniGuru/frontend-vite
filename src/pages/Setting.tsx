@@ -1,4 +1,4 @@
-import UserForm from '../components/User/UserForm';
+import UserSetting from '../components/User/UserSetting';
 import { useState } from 'react';
 import { useAuth } from '../Context/Auth/useAuth';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +14,7 @@ const Setting = () => {
       case 0:
         return <div></div>;
       case 1:
-        return <UserForm />;
+        return <UserSetting />;
     }
   }
   return (
@@ -36,7 +36,7 @@ const Setting = () => {
             className="text-2xl font-bold cursor-pointer hover:bg-slate-400 p-2 duration-100 ease-in-out rounded-lg pl-12"
             onClick={() => setOption(1)}
           >
-            User
+            Profile
           </h1>
           <h1
             className="text-2xl font-bold cursor-pointer hover:bg-slate-400 p-2 duration-100 ease-in-out rounded-lg pl-12"
@@ -46,7 +46,7 @@ const Setting = () => {
           </h1>
         </div>
         {/* Options */}
-        <div className="bg-slate-400 w-[80%] flex justify-center p-4 rounded-xl">
+        <div className="bg-slate-400 w-[80%] flex  p-4 rounded-xl ">
           {renderOption()}
         </div>
       </div>

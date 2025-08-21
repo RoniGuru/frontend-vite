@@ -25,7 +25,7 @@ const UpdateNameForm = () => {
     }
   }
   return (
-    <div className="h-[400px]  flex flex-col gap-2 font-bold ">
+    <div className="h-[300px]  flex flex-col gap-2 font-bold ">
       <div>
         <label>New Username</label>
         <input
