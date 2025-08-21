@@ -8,7 +8,7 @@ import {
 
 interface leaderboardData {
   id: number;
-  name: string;
+  username: string;
   high_score: number;
 }
 interface leaderboardState {

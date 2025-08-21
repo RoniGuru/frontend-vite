@@ -45,7 +45,9 @@ const LeaderBoard = () => {
               className="flex justify-between   px-4 py-2 border-b border-gray-600 text-white"
             >
               <span className="text-gray-400">#{index + 1}</span>
-              <span className="flex-1 mx-2">{entry ? entry.name : '---'}</span>
+              <span className="flex-1 mx-2">
+                {entry ? entry.username : '---'}
+              </span>
               <span className="font-mono">
                 {entry ? entry.high_score : '---'}
               </span>
