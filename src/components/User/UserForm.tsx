@@ -12,10 +12,12 @@ const UserForm = ({
   );
   return (
     <div className="w-[100%] flex flex-col justify-center items-center h-full">
-      <div className="w-[60%] bg-black h-[80%] flex flex-col items-center">
-        <h1 className="text-4xl text-white text-center font-bold mb-2">User</h1>
+      <div className="w-[60%]  h-[80%] flex flex-col items-center ">
+        <h1 className="text-4xl text-white text-center font-bold mb-4">
+          Edit User
+        </h1>
         {/* tab */}
-        <div className="flex mb-6 bg-gray-800 rounded-lg p-1">
+        <div className="flex mb-6 bg-gray-800 rounded-lg p-1 w-[60%]">
           <button
             onClick={() => setActiveTab('username')}
             className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${

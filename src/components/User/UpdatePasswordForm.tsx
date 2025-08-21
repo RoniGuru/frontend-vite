@@ -27,8 +27,9 @@ const UpdatePasswordForm = () => {
     }
   }
   return (
-    <div className="h-[400px]  flex flex-col gap-2 font-bold ">
-      <div>
+    <div className="h-[100%]   flex flex-col gap-2 font-bold   w-[100%] items-center  justify-between pb-4">
+      {/* Inputs */}
+      <div className="w-[60%] h-[60%]">
         <label>Old Password</label>
         <input
           value={password}
@@ -37,8 +38,6 @@ const UpdatePasswordForm = () => {
           placeholder="Enter your old password"
           onChange={(e) => setPassword(e.target.value)}
         />
-      </div>
-      <div>
         <label>New Password</label>
         <input
           value={newPassword}
@@ -47,8 +46,6 @@ const UpdatePasswordForm = () => {
           placeholder="Enter your new password"
           onChange={(e) => setNewPassword(e.target.value)}
         />
-      </div>
-      <div>
         <label>Confirm New Password</label>
         <input
           value={confirmNewPassword}
@@ -58,8 +55,9 @@ const UpdatePasswordForm = () => {
           onChange={(e) => setConfirmNewPassword(e.target.value)}
         />
       </div>
+
       <button
-        className="  w-full bg-gray-600  hover:bg-slate-700 py-4  rounded-md font-medium  duration-300 ease-out text-white"
+        className=" w-[60%] bg-gray-600  hover:bg-slate-700 py-4  rounded-md font-medium  duration-300 ease-out text-white"
         onClick={handlePasswordForm}
       >
         Change Password

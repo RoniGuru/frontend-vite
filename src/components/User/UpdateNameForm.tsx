@@ -25,18 +25,17 @@ const UpdateNameForm = () => {
     }
   }
   return (
-    <div className="h-[300px]  flex flex-col gap-2 font-bold ">
-      <div>
+    <div className="h-[80%]  flex flex-col gap-2 font-bold w-[100%] items-center  justify-between pb-4">
+      {/* Inputs */}
+      <div className="w-[60%] h-[60%]">
         <label>New Username</label>
         <input
           value={newUsername}
           type="text"
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500  mb-4 "
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500  mb-4  "
           placeholder="Enter new username"
           onChange={(e) => setNewUsername(e.target.value)}
         />
-      </div>
-      <div>
         <label> Password</label>
         <input
           value={password}
@@ -48,7 +47,7 @@ const UpdateNameForm = () => {
       </div>
 
       <button
-        className="  w-full bg-gray-600  hover:bg-slate-700 py-4  rounded-md font-medium  duration-300 ease-out text-white"
+        className="  w-[60%] bg-gray-600  hover:bg-slate-700 py-4  rounded-md font-medium  duration-300 ease-out text-white"
         onClick={handleNameForm}
       >
         Change Username
