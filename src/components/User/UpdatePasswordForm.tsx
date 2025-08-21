@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { RootState, AppDispatch } from '../../state/store';
 import { updateUser } from '../../state/user/userSlice';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const UpdatePasswordForm = () => {
   const [password, setPassword] = useState<string>('');
@@ -14,6 +15,24 @@ const UpdatePasswordForm = () => {
   const navigate = useNavigate();
 
   async function handlePasswordForm() {
+    if (newPassword.length < 7) {
+      toast.error('password length should be not be less then 7 characters', {
+        duration: 10000,
+        style: {
+          background: '#363636',
+          color: '#fff',
+        },
+      });
+    } else if (newPassword != confirmNewPassword) {
+      toast.error('passwords should be same', {
+        duration: 10000,
+        style: {
+          background: '#363636',
+          color: '#fff',
+        },
+      });
+    }
+
     await dispatch(
       updateUser({
         update: { new_password: newPassword },
@@ -24,6 +43,14 @@ const UpdatePasswordForm = () => {
 
     if (userState.error != '') {
       navigate('/');
+    } else {
+      toast.error(userState.error || 'Update  failed', {
+        duration: 10000,
+        style: {
+          background: '#363636',
+          color: '#fff',
+        },
+      });
     }
   }
   return (
