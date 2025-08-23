@@ -11,85 +11,86 @@ import { api } from '../../api/index';
 interface userState {
   user: User;
   loading: boolean;
-  error: string;
+  error: { message: string | null; status: number | null };
 }
 
 const initialState: userState = {
   user: { id: 0, username: '', created_at: '', high_score: 0 },
   loading: false,
-  error: '',
+  error: { message: null, status: null },
 };
+interface responseError {
+  message: string;
+  status: number;
+}
 
-export const saveUserScore = createAsyncThunk(
-  'user/saveUserScore',
-  async ({ score, id }: { score: number; id: number }, { rejectWithValue }) => {
-    try {
-      const response = await api.put(`/user/${id}`, { high_score: score });
-      const data: updateResponse = response.data;
-      return data.user.high_score;
-    } catch (error: unknown) {
-      // Handle axios errors
-      if (axios.isAxiosError(error)) {
-        // Server responded with error status
-        if (error.response) {
-          return rejectWithValue({
-            message: error.response.data?.message || 'Failed to save score',
-            status: error.response.status,
-          });
-        }
-        // Network error or request setup error
+export const saveUserScore = createAsyncThunk<
+  number, // Return type (high_score)
+  { score: number; id: number }, // Argument type
+  {
+    rejectValue: responseError; // Type for rejectWithValue payload
+  }
+>('user/saveUserScore', async ({ score, id }, { rejectWithValue }) => {
+  try {
+    const response = await api.put(`/user/${id}`, { high_score: score });
+    const data: updateResponse = response.data;
+    return data.user.high_score;
+  } catch (error: unknown) {
+    // Handle axios errors
+    if (axios.isAxiosError(error)) {
+      // Server responded with error status
+      if (error.response) {
         return rejectWithValue({
-          message: error.message || 'Network error occurred',
-          status: null,
+          message: error.response.data?.message || 'Failed to save score',
+          status: error.response.status,
         });
       }
-      // Non-axios error
+      // Network error or request setup error
       return rejectWithValue({
-        message: 'An unexpected error occurred',
-        status: null,
+        message: error.message || 'Network error occurred',
+        status: error.status || 500,
       });
     }
+    // Non-axios error
+    return rejectWithValue({
+      message: 'An unexpected error occurred',
+      status: 500,
+    });
   }
-);
+});
 
-export const updateUser = createAsyncThunk(
-  'user/updateUser',
-  async (
-    {
-      update,
-      password,
-      id,
-    }: { update: Partial<UpdateUserDTO>; password: string; id: number },
-    { rejectWithValue }
-  ) => {
-    try {
-      const response = await api.put(`/user/${id}`, { password, ...update });
-      const data: updateResponse = response.data;
-      return data.user;
-    } catch (error: unknown) {
-      // Handle axios errors
-      if (axios.isAxiosError(error)) {
-        // Server responded with error status
-        if (error.response) {
-          return rejectWithValue({
-            message: error.response.data?.message || 'Failed to update user',
-            status: error.response.status,
-          });
-        }
-        // Network error or request setup error
+export const updateUser = createAsyncThunk<
+  User,
+  { update: Partial<UpdateUserDTO>; password: string; id: number },
+  {
+    rejectValue: responseError;
+  }
+>('user/updateUser', async ({ update, password, id }, { rejectWithValue }) => {
+  try {
+    const response = await api.put(`/user/${id}`, { password, ...update });
+    const data: updateResponse = response.data;
+    return data.user;
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
         return rejectWithValue({
-          message: error.message || 'Network error occurred',
-          status: null,
+          message: error.response.data?.message || 'Failed to update user',
+          status: error.response.status,
         });
       }
-      // Non-axios error
+
       return rejectWithValue({
-        message: 'An unexpected error occurred',
-        status: null,
+        message: error.message || 'Network error occurred',
+        status: error.status || 500,
       });
     }
+    // Non-axios error
+    return rejectWithValue({
+      message: 'An unexpected error occurred',
+      status: 500,
+    });
   }
-);
+});
 
 const userSlice = createSlice({
   name: 'user',
@@ -109,7 +110,7 @@ const userSlice = createSlice({
     builder
       .addCase(saveUserScore.pending, (state) => {
         state.loading = true;
-        state.error = '';
+        state.error = { message: null, status: null };
       })
       .addCase(
         saveUserScore.fulfilled,
@@ -123,7 +124,7 @@ const userSlice = createSlice({
       })
       .addCase(updateUser.pending, (state) => {
         state.loading = true;
-        state.error = '';
+        state.error = { message: null, status: null };
       })
       .addCase(
         updateUser.fulfilled,
@@ -134,9 +135,16 @@ const userSlice = createSlice({
           }
         }
       )
-      .addCase(updateUser.rejected, (state) => {
+      .addCase(updateUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = 'update user failed';
+        if (action.payload) {
+          state.error = {
+            message: action.payload.message,
+            status: action.payload.status,
+          };
+        } else {
+          state.error.message = action.error.message as string;
+        }
       });
   },
 });

@@ -1,6 +1,6 @@
 export interface updateResponse {
   user: {
-    id: string;
+    id: number;
     username: string;
     created_at: string;
     high_score: number;

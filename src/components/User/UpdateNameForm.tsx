@@ -21,10 +21,10 @@ const UpdateNameForm = () => {
         id: userState.user.id,
       })
     );
-    if (userState.error == '') {
+    if (!userState.error.message) {
       navigate('/');
     } else {
-      toast.error(userState.error || 'Update  failed', {
+      toast.error(userState.error.message || 'Update  failed', {
         duration: 10000,
         style: {
           background: '#363636',
