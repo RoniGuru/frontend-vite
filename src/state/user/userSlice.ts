@@ -33,11 +33,19 @@ export const saveUserScore = createAsyncThunk<
 >('user/saveUserScore', async ({ score, id }, { rejectWithValue }) => {
   try {
     const response = await api.put(`/user/${id}`, { high_score: score });
+
     const data: updateResponse = response.data;
+    if (!data.user) {
+      return rejectWithValue({
+        message: response.data?.message || 'no user',
+        status: 404,
+      });
+    }
     return data.user.high_score;
   } catch (error: unknown) {
     // Handle axios errors
     if (axios.isAxiosError(error)) {
+      console.log(error);
       // Server responded with error status
       if (error.response) {
         return rejectWithValue({
@@ -68,7 +76,14 @@ export const updateUser = createAsyncThunk<
 >('user/updateUser', async ({ update, password, id }, { rejectWithValue }) => {
   try {
     const response = await api.put(`/user/${id}`, { password, ...update });
+
     const data: updateResponse = response.data;
+    if (!data.user) {
+      return rejectWithValue({
+        message: response.data?.message || 'no user',
+        status: 404,
+      });
+    }
     return data.user;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
