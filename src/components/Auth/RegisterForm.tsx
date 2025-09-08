@@ -40,7 +40,7 @@ const RegisterForm = () => {
     }
 
     const result = await register(username, password);
-
+    toast.dismiss();
     if (result.success) {
       toast.success(result.message || 'registered', {
         duration: 10000,

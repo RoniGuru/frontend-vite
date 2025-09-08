@@ -83,8 +83,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response) {
-          console.log('Server error:', error.response.data);
-          return { success: false, message: error.response.data };
+          console.log('Server error:', error.response.data.message);
+          return { success: false, message: error.response.data.message };
         }
         if (error.request) {
           console.log('Network error:', error.message);

@@ -13,8 +13,10 @@ const LoginForm = () => {
 
   const handleLogin = async () => {
     const result = await login(username, password);
+    toast.dismiss();
     if (result.success) {
       navigate('/');
+
       toast.success(result.message || 'registered', {
         duration: 10000,
         style: {
