@@ -15,18 +15,31 @@ const Finished = () => {
 
   async function saveScore() {
     try {
-      const result = dispatch(
+      const result = await dispatch(
         saveUserScore({ score: game.score, id: userState.user.id })
       );
+      toast.dismiss();
       if (saveUserScore.fulfilled.match(result)) {
-        console.log('New high score:', result.payload);
+        toast.success('score saved', {
+          duration: 10000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+        });
       } else {
-        console.log('score not saved');
+        toast.error('score not saved', {
+          duration: 10000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+        });
       }
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : 'Save Error occurred';
-
+      toast.dismiss();
       toast.error(errorMessage, {
         duration: 10000,
         style: {
