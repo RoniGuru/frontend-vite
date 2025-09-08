@@ -15,9 +15,15 @@ const LoginForm = () => {
     const result = await login(username, password);
     if (result.success) {
       navigate('/');
+      toast.success(result.message || 'registered', {
+        duration: 10000,
+        style: {
+          background: '#363636',
+          color: '#fff',
+        },
+      });
     } else {
-      // alert(result.error || 'Login failed');
-      toast.error(result.error || 'Login failed', {
+      toast.error(result.message || 'Login failed', {
         duration: 10000,
         style: {
           background: '#363636',

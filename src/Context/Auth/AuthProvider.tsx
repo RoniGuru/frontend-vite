@@ -19,44 +19,45 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   async function login(
     username: string,
     password: string
-  ): Promise<{ success: boolean; error?: string }> {
+  ): Promise<{ success: boolean; message: string }> {
     setIsLoading(true);
     try {
       const response = await api.post('/login', { username, password });
-      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         const data: LoginResponseData = response.data;
-
+        if (!data.user) {
+          return { success: false, message: 'no user given' };
+        }
         dispatch(setUser(data.user));
         api.defaults.headers.common[
           'Authorization'
         ] = `Bearer ${data.accessToken}`;
-        return { success: true };
+        return { success: true, message: 'user logged in' };
+      } else {
+        return { success: false, message: 'login failed ' };
       }
-
-      return { success: false, error: 'Login failed' };
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response) {
           console.log('Server error:', error.response.data);
           return {
             success: false,
-            error: error.response.data || 'Server error occurred',
+            message: error.response.data.message || 'Server error occurred',
           };
         }
         if (error.request) {
           console.log('Network error:', error.message);
-          return { success: false, error: 'Network error occurred' };
+          return { success: false, message: 'Network error occurred' };
         }
       }
 
       if (error instanceof Error) {
         console.log('Error:', error.message);
-        return { success: false, error: error.message };
+        return { success: false, message: error.message };
       }
 
-      return { success: false, error: 'An unknown error occurred' };
+      return { success: false, message: 'An unknown error occurred' };
     } finally {
       setIsLoading(false);
     }
@@ -64,7 +65,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   async function register(
     username: string,
     password: string
-  ): Promise<{ success: boolean; error?: string }> {
+  ): Promise<{ success: boolean; message: string }> {
     setIsLoading(true);
     try {
       console.log('trying');
@@ -76,29 +77,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       console.log(response);
 
       if (response.status === 200) {
-        return { success: true };
+        return { success: true, message: 'user registered' };
       }
-      return { success: false, error: 'registration failed' };
+      return { success: false, message: 'registration failed' };
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response) {
           console.log('Server error:', error.response.data);
-          return { success: false, error: error.response.data };
+          return { success: false, message: error.response.data };
         }
         if (error.request) {
           console.log('Network error:', error.message);
-
-          return { success: false, error: 'Network error occurred' };
+          return { success: false, message: 'Network error occurred' };
         }
       }
 
       if (error instanceof Error) {
         console.log('Error:', error.message);
 
-        return { success: false, error: error.message };
+        return { success: false, message: error.message };
       }
 
-      return { success: false, error: 'An unknown error occurred' };
+      return { success: false, message: 'An unknown error occurred' };
     } finally {
       setIsLoading(false);
     }

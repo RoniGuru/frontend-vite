@@ -96,7 +96,7 @@ export const updateUser = createAsyncThunk<
 
       return rejectWithValue({
         message: error.message || 'Network error occurred',
-        status: error.status || 500,
+        status: 0,
       });
     }
     // Non-axios error

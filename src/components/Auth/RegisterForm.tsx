@@ -39,12 +39,18 @@ const RegisterForm = () => {
       return;
     }
 
-    const response = await register(username, password);
+    const result = await register(username, password);
 
-    if (response.success) {
-      window.location.reload();
+    if (result.success) {
+      toast.success(result.message || 'registered', {
+        duration: 10000,
+        style: {
+          background: '#363636',
+          color: '#fff',
+        },
+      });
     } else {
-      toast.error(response.error || 'Registration  failed', {
+      toast.error(result.message || 'Registration  failed', {
         duration: 10000,
         style: {
           background: '#363636',
