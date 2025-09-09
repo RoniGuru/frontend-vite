@@ -15,11 +15,11 @@ const Setting = () => {
   }
   return (
     <div className=" h-screen w-screen flex justify-center items-center">
-      <div className="h-[90%] w-[90%] bg-slate-300 p-10 flex flex-row">
+      <div className="h-[90%] w-[50%] bg-slate-300 p-10 flex flex-row gap-10">
         {/* Options */}
 
         <SettingOptionHeaders option={option} setOption={setOption} />
-        {/* Options */}
+
         <div className="bg-slate-400 w-[80%] flex  p-4 rounded-xl ">
           {renderOption()}
         </div>

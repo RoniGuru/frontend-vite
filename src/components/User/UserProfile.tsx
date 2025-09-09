@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../state/store';
+import { FaRegEdit } from 'react-icons/fa';
 
 const UserProfile = ({
   setUpdate,
@@ -8,18 +9,21 @@ const UserProfile = ({
 }) => {
   const user = useSelector((state: RootState) => state.user.user);
   return (
-    <div className="text-4xl font-bold  h-[60%] w-[100%] text-center flex flex-col justify-between items-center p-6 ">
-      <div>
-        <h1 className="text-7xl">Profile</h1>
-        <p className="text-center">{user.username}</p>
-        <p className="text-center">{user.created_at.substring(0, 10)}</p>
+    <div className=" font-bold  h-[60%] w-[100%] flex flex-col p-6   ">
+      <h1 className="justify-start text-slate-700 mb-2"> My Profile</h1>
+      <div className="flex bg-white w-[100%]  flex-row rounded-xl  justify-between p-4 items-center shadow-lg">
+        {/* Profile card */}
+        <div className="text-start  p-4 ">
+          <p>Username : {user.username}</p>
+          <p>Date Created: {user.created_at.substring(0, 10)}</p>
+        </div>
+
+        <FaRegEdit
+          onClick={() => setUpdate(true)}
+          size={30}
+          className="items-center align-middle cursor-pointer hover:scale-125 duration-100 ease-in"
+        />
       </div>
-      <button
-        className="  w-[40%] bg-gray-600  hover:bg-slate-700 py-4  rounded-md font-medium  duration-300 ease-out text-white"
-        onClick={() => setUpdate(true)}
-      >
-        Edit User
-      </button>
     </div>
   );
 };
