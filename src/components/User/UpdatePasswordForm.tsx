@@ -23,6 +23,7 @@ const UpdatePasswordForm = () => {
           color: '#fff',
         },
       });
+      return;
     } else if (newPassword != confirmNewPassword) {
       toast.error('passwords should be same', {
         duration: 10000,
@@ -31,20 +32,26 @@ const UpdatePasswordForm = () => {
           color: '#fff',
         },
       });
+      return;
     }
 
-    await dispatch(
-      updateUser({
-        update: { new_password: newPassword },
-        password,
-        id: userState.user.id,
-      })
-    );
+    try {
+      await dispatch(
+        updateUser({
+          update: { new_password: newPassword },
+          password,
+          id: userState.user.id,
+        })
+      ).unwrap();
 
-    if (!userState.error.message) {
       navigate('/');
-    } else {
-      toast.error(userState.error.message || 'Update  failed', {
+    } catch (error) {
+      const errorMessage =
+        error && typeof error === 'object' && 'message' in error
+          ? (error as { message: string }).message
+          : 'Update failed';
+
+      toast.error(errorMessage, {
         duration: 10000,
         style: {
           background: '#363636',

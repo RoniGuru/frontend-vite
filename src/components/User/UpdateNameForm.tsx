@@ -14,17 +14,22 @@ const UpdateNameForm = () => {
   const navigate = useNavigate();
 
   async function handleNameForm() {
-    await dispatch(
-      updateUser({
-        update: { username: newUsername },
-        password,
-        id: userState.user.id,
-      })
-    );
-    if (!userState.error.message) {
+    try {
+      await dispatch(
+        updateUser({
+          update: { username: newUsername },
+          password,
+          id: userState.user.id,
+        })
+      ).unwrap();
       navigate('/');
-    } else {
-      toast.error(userState.error.message || 'Update  failed', {
+    } catch (error) {
+      const errorMessage =
+        error && typeof error === 'object' && 'message' in error
+          ? (error as { message: string }).message
+          : 'Update failed';
+
+      toast.error(errorMessage, {
         duration: 10000,
         style: {
           background: '#363636',

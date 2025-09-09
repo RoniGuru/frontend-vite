@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import UpdatePasswordForm from './UpdatePasswordForm';
 import UpdateNameForm from './UpdateNameForm';
+import { IoMdArrowRoundBack } from 'react-icons/io';
 
 const UserForm = ({
   setUpdate,
@@ -12,8 +13,13 @@ const UserForm = ({
   );
   return (
     <div className="w-[100%] flex flex-col justify-center items-center h-full">
-      <div className="w-[60%]  h-[80%] flex flex-col items-center ">
-        <h1 className="text-4xl text-white text-center font-bold mb-4">
+      <div className="w-[100%]  h-[80%] flex flex-col items-center ">
+        <h1 className="text-4xl text-white text-center font-bold mb-4 flex flex-row ">
+          <IoMdArrowRoundBack
+            size={40}
+            className="cursor-pointer hover:text-slate-500 duration-100 ease-in"
+            onClick={() => setUpdate(false)}
+          />
           Edit User
         </h1>
         {/* tab */}
@@ -41,12 +47,6 @@ const UserForm = ({
         </div>
 
         {activeTab === 'username' ? <UpdateNameForm /> : <UpdatePasswordForm />}
-        <button
-          className="  w-[60%] bg-gray-600  hover:bg-slate-700 py-4  rounded-md font-medium  duration-300 ease-out text-white"
-          onClick={() => setUpdate(false)}
-        >
-          Go back to User
-        </button>
       </div>
     </div>
   );
