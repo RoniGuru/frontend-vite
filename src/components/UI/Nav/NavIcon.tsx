@@ -1,23 +1,16 @@
-import { useSelector } from 'react-redux';
-import type { RootState } from '../../../state/store';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { useAuth } from '../../../Context/Auth/useAuth';
 import { Link } from 'react-router-dom';
+import { CgProfile } from 'react-icons/cg';
 
 const NavIcon = () => {
   const { logout } = useAuth();
-  const user = useSelector((state: RootState) => state.user.user);
-  const initial = user.username[0];
 
   return (
     <>
       <Menu>
-        <MenuButton className=" bg-gray-800 rounded-3xl hover:bg-slate-600 cursor-pointer duration-100">
-          <div className="w-[100px] flex items-center justify-center h-[60px] ">
-            <div className="rounded-full h-[40px] w-[40px] items-center flex  justify-center bg-gray-400 ">
-              <h1 className="text-3xl font-bold ">{initial.toUpperCase()}</h1>
-            </div>
-          </div>
+        <MenuButton className="   hover:bg-slate-600 cursor-pointer duration-100 rounded-full h-16 w-16 items-center flex justify-center">
+          <CgProfile size={40} className="text-white" />
         </MenuButton>
         <MenuItems
           anchor="bottom"
