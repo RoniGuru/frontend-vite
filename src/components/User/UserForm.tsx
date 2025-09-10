@@ -14,13 +14,14 @@ const UserForm = ({
   return (
     <div className="w-[100%] flex flex-col justify-center items-center h-full">
       <div className="w-[100%]  h-[80%] flex flex-col items-center ">
-        <h1 className="text-4xl text-white text-center font-bold mb-4 flex flex-row ">
+        <h1 className="text-4xl text-white font-bold mb-4 flex items-center  w-[60%] justify-between">
           <IoMdArrowRoundBack
             size={40}
-            className="cursor-pointer hover:text-slate-500 duration-100 ease-in"
+            className="cursor-pointer hover:text-slate-500 duration-100 ease-in flex-1 "
             onClick={() => setUpdate(false)}
           />
-          Edit User
+          <span>Edit User</span>
+          <div className="flex-1"></div>
         </h1>
         {/* tab */}
         <div className="flex mb-6 bg-gray-800 rounded-lg p-1 w-[60%]">

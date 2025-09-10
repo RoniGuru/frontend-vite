@@ -15,7 +15,7 @@ const Setting = () => {
   }
   return (
     <div className=" h-screen w-screen flex justify-center items-center">
-      <div className="h-[90%] w-[50%] bg-slate-300 p-10 flex flex-row gap-10">
+      <div className="h-[90%] w-[50%] bg-slate-300 p-10 flex flex-row gap-1 rounded-xl ">
         {/* Options */}
 
         <SettingOptionHeaders option={option} setOption={setOption} />
